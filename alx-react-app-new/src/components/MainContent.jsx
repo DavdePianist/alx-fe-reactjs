@@ -8,8 +8,9 @@ function MainContent() {
       }}
     >
       <p style={{ fontSize: '18px', lineHeight: '1.6' }}>
-        I love exploring cities around the world, experiencing different
-        cultures, food, and architecture.
+        
+
+        I love to visit New York, Paris, and Tokyo.
       </p>
     </main>
   );
