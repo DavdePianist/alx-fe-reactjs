@@ -1,17 +1,9 @@
-// App.jsx
-import React from 'react';
-import UserProfile from './components/UserProfile';
+import ProfilePage from './ProfilePage';
 
 function App() {
-  return (
-    <div>
-      <UserProfile 
-        name="Alice" 
-        age="25" 
-        bio="Loves hiking and photography" 
-      />
-    </div>
-  );
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+
+  return <ProfilePage userData={userData} />;
 }
 
 export default App;
