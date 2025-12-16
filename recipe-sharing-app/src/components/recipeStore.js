@@ -1,23 +1,15 @@
-import create from 'zustand';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
-export const useRecipeStore = create((set) => ({
-  recipes: [],                  // existing recipes array
-  searchTerm: '',               // new state for search input
-  filteredRecipes: [],          // new state for filtered results
-
-  // Action to set search term
-  setSearchTerm: (term) => set({ searchTerm: term }),
-
-  // Action to filter recipes based on search term
-  filterRecipes: () =>
-    set((state) => ({
-      filteredRecipes: state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      ),
-    })),
-
-  // Existing actions
-  addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
-  setRecipes: (recipes) => set({ recipes }),
-}));
+function App() {
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>Recipe Sharing App</h1>
+      <AddRecipeForm />
+      <SearchBar />
+      <RecipeList />
+      <FavoritesList />
+      <RecommendationsList />
+    </div>
+  );
+}
