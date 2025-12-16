@@ -1,17 +1,26 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
-import RecipeDetails from './components/RecipeDetails';
+import SearchBar from './components/SearchBar';
+import { useRecipeStore } from './components/recipeStore';
 
 function App() {
+  const recipes = useRecipeStore((state) => state.recipes);
+  const setRecipes = useRecipeStore((state) => state.setRecipes);
+  const filterRecipes = useRecipeStore((state) => state.filterRecipes);
+
+  // Initialize filteredRecipes on app start
+  useEffect(() => {
+    filterRecipes();
+  }, [recipes]);
+
   return (
-    <BrowserRouter>
+    <div style={{ padding: '20px' }}>
+      <h1>Recipe Sharing App</h1>
       <AddRecipeForm />
-      <Routes>
-        <Route path="/" element={<RecipeList />} />
-        <Route path="/recipes/:id" element={<RecipeDetails />} />
-      </Routes>
-    </BrowserRouter>
+      <SearchBar />
+      <RecipeList />
+    </div>
   );
 }
 
