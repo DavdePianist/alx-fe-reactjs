@@ -1,1 +1,1 @@
-
+The GitHub User Search Application will allow users to search for GitHub profiles using the GitHub API. It will feature a search input, display results including basic user information, and link to their GitHub profiles.
