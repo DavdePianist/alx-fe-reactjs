@@ -43,6 +43,10 @@ const Search = () => {
       {loading && <p className="mt-4">Loading...</p>}
       {error && <p className="mt-4 text-red-500">{error}</p>}
 
+      (location) {
+    searchQuery += ` location:${location}`
+  }
+
       {/* ✅ map */}
       {users.length > 0 && (
         <ul className="mt-6 space-y-4">
