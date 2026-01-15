@@ -34,4 +34,45 @@ const Search = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <bu
+        <button className="bg-blue-600 text-white px-4 rounded">
+          Search
+        </button>
+      </form>
+
+      {/* ✅ conditional rendering with && */}
+      {loading && <p className="mt-4">Loading...</p>}
+      {error && <p className="mt-4 text-red-500">{error}</p>}
+
+      {/* ✅ map */}
+      {users.length > 0 && (
+        <ul className="mt-6 space-y-4">
+          {users.map((user) => (
+            <li
+              key={user.id}
+              className="border p-4 rounded flex items-center gap-4"
+            >
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                className="w-16 h-16 rounded-full"
+              />
+              <div>
+                <p className="font-semibold">{user.login}</p>
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600"
+                >
+                  View Profile
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+export default Search
