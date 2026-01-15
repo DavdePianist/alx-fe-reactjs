@@ -3,25 +3,31 @@ import { searchUsers } from "../services/githubService"
 
 const Search = () => {
   const [query, setQuery] = useState("")
+  const [location, setLocation] = useState("")
+  const [minRepos, setMinRepos] = useState("")
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
-  // ✅ async + await
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  // ✅ fetchUserData function
+  const fetchUserData = async () => {
     setLoading(true)
     setError("")
     setUsers([])
 
     try {
-      const data = await searchUsers(query)
+      const data = await searchUsers(query, location, minRepos)
       setUsers(data.items)
     } catch (err) {
-      setError("Looks like we can’t find the user")
+      setError("Looks like we can’t find any users")
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetchUserData()
   }
 
   return (
@@ -34,20 +40,28 @@ const Search = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+        <input
+          type="text"
+          className="flex-1 border p-2 rounded"
+          placeholder="Location (optional)"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <input
+          type="number"
+          className="w-24 border p-2 rounded"
+          placeholder="Min repos"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+        />
         <button className="bg-blue-600 text-white px-4 rounded">
           Search
         </button>
       </form>
 
-      {/* ✅ conditional rendering with && */}
       {loading && <p className="mt-4">Loading...</p>}
       {error && <p className="mt-4 text-red-500">{error}</p>}
 
-      (location) {
-    searchQuery += ` location:${location}`
-  }
-
-      {/* ✅ map */}
       {users.length > 0 && (
         <ul className="mt-6 space-y-4">
           {users.map((user) => (
